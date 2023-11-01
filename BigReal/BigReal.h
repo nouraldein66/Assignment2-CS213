@@ -7,11 +7,10 @@ private:
 public:
 //    bool isValid();
     bool isNeg();
-   friend istream &operator >>(istream &in , BigReal &a);
-   friend  ostream &operator<<(ostream &out , BigReal& a);
-   bool operator == (const BigReal & a)const;
-   BigReal operator+(BigReal& a);
+    friend istream &operator >>(istream &in , BigReal &a);
+    friend  ostream &operator<<(ostream &out , BigReal& a);
+    bool operator == (const BigReal & a)const;
+    BigReal operator+(BigReal& a);
+    bool operator< (BigReal& anotherreal);
+    bool operator> (BigReal& anotherreal);
 };
-
-
-
