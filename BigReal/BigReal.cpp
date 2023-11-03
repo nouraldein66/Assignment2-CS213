@@ -152,7 +152,7 @@ BigReal BigReal::operator+(BigReal &a) {
                 continue;
             }
 
-            if (this->s[i] != '-') {
+            if (this->s[i] != '-' && this->s[i] != '+') {
                 first_before_dot += this->s[i];
             }
         }
@@ -177,7 +177,7 @@ BigReal BigReal::operator+(BigReal &a) {
                 continue;
             }
 
-            if (a.s[i] != '-') {
+            if (a.s[i] != '-' && a.s[i] != '+') {
                 second_before_dot += a.s[i];
             }
         }
@@ -222,6 +222,27 @@ BigReal BigReal::operator+(BigReal &a) {
         if (frac.empty()) {
             ans.s.pop_back();
         }
+    }
+    else
+    {
+       BigReal gr , sm;
+       if(this->s > a.s)
+             gr.s = this->s ,
+             sm.s = a.s;
+       else
+           gr.s = a.s,
+           sm.s = this->s;
+        char sign = gr.s.front();
+       if(gr.s.front() == '-' || gr.s.front() == '+')
+            gr.s.erase(gr.s.begin());
+       if(sm.s.front() == '-' || sm.s.front() == '+')
+            sm.s.erase(sm.s.begin());
+
+      BigReal subtr =  gr - sm;
+     if(sign == '-')
+          ans.s = "-";
+     ans.s += subtr.s;
+
     }
     return ans;
 }
@@ -1018,7 +1039,8 @@ bool BigReal::operator>(BigReal &anotherreal)  {
 }
 
 ostream &operator<<(ostream &out, const BigReal &a) {
-    cout << a.s;
+   for(auto i : a.s)
+        if(i != '+')cout<<i;
     return out;
 }
 
