@@ -33,7 +33,7 @@ void pattern(int left, int length) {
 int main() {
    int n;
    cin >> n; // n should be a power of 2
-   pattern( 0, n);
+   pattern(0, n);
 
    return 0;
 }
