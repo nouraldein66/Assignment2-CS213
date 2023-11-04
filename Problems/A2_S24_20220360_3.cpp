@@ -1,9 +1,9 @@
 // File: A2_S24_20220360_3.cpp
 // Purpose: Solving the third problem
-// Author: Dr. Mohammed El-Ramly
+// Author: Nour al-deen Alaa
 // Section: S24
 // ID: 20220360
-// TA: To be determined
+// TA: Muhammad Talaat
 // Date: 27 Oct 2023
 
 #include <iostream>
