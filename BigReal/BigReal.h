@@ -1,3 +1,6 @@
+#ifndef _BIGREAL_H
+#define _BIGREAL_H
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -20,3 +23,5 @@ public:
 };
 
 bool compare_fraction(string s1, string s2);
+
+#endif //_BIGREAL_H
