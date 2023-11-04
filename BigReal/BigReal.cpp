@@ -225,23 +225,23 @@ BigReal BigReal::operator+(BigReal &a) {
     }
     else
     {
-       BigReal gr , sm;
-       if(this->s > a.s)
-             gr.s = this->s ,
-             sm.s = a.s;
-       else
-           gr.s = a.s,
-           sm.s = this->s;
+        BigReal gr , sm;
+        if(this->s > a.s)
+            gr.s = this->s ,
+                    sm.s = a.s;
+        else
+            gr.s = a.s,
+                    sm.s = this->s;
         char sign = gr.s.front();
-       if(gr.s.front() == '-' || gr.s.front() == '+')
+        if(gr.s.front() == '-' || gr.s.front() == '+')
             gr.s.erase(gr.s.begin());
-       if(sm.s.front() == '-' || sm.s.front() == '+')
+        if(sm.s.front() == '-' || sm.s.front() == '+')
             sm.s.erase(sm.s.begin());
 
-      BigReal subtr =  gr - sm;
-     if(sign == '-')
-          ans.s = "-";
-     ans.s += subtr.s;
+        BigReal subtr =  gr - sm;
+        if(sign == '-')
+            ans.s = "-";
+        ans.s += subtr.s;
 
     }
     return ans;
@@ -602,6 +602,9 @@ BigReal BigReal::operator-(BigReal &a) {
             }
             return result;
         }
+    } else {
+        result.setNum("0.0");
+        return result;
     }
 }
 
@@ -1039,7 +1042,7 @@ bool BigReal::operator>(BigReal &anotherreal)  {
 }
 
 ostream &operator<<(ostream &out, const BigReal &a) {
-   for(auto i : a.s)
+    for(auto i : a.s)
         if(i != '+')cout<<i;
     return out;
 }
