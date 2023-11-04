@@ -609,7 +609,6 @@ BigReal BigReal::operator-(BigReal &a) {
 }
 
 bool BigReal::operator<(BigReal &another_real)  {
-    //isValid(another_real);
 
     if (BigReal::isNeg() && !another_real.isNeg()) {      //first real is negative, other is positive
         return true;
@@ -827,8 +826,7 @@ bool BigReal::operator<(BigReal &another_real)  {
 }
 
 bool BigReal::operator>(BigReal &anotherreal)  {
-    //isValid(anotherreal);
-
+   
     if (BigReal::isNeg() && !anotherreal.isNeg()) {  //first real is negative, other is positive
         return false;
     }
