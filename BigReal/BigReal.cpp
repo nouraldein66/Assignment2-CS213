@@ -1,3 +1,11 @@
+// File: A2_Task2_S23, S24_20220027_20220028_20220360.cpp
+// Purpose: Making a class for big real numbers that ordinary C++ data types cannot handle
+// Authors: Nour Aldeen, Ahmed Alaa Aldeen, Ahmed Abdelnabi
+// Section: S23, S24
+// ID: 20220360, 20220028, 20220027
+// TA: Muhammad Talaat
+// Date: 5 Nov 2023
+
 #include "BigReal.h"
 
 bool BigReal::isNeg() {
@@ -571,7 +579,8 @@ BigReal BigReal::operator-(BigReal &a) {
 
             int i = fraction_result_size - 1;
 
-            while (fraction_result[i] == '0') {
+
+            while (i >= 0 && fraction_result[i] == '0') {
                 fraction_result.pop_back();
                 --i;
             }
