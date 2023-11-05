@@ -12,7 +12,7 @@ bool BigReal::isNeg() {
     return (s[0] == '-');
 }
 
-bool BigReal::isValid() {
+bool BigReal::isValid() const {
     int number_of_dots {0};
     bool no_digits {true};
 
@@ -86,6 +86,10 @@ istream &operator>>(istream &in, BigReal &a) {
 }
 
 bool BigReal::operator==(const BigReal &a) const {
+    if (!(this->isValid()) || !a.isValid()) {
+        cout << "Invalid terms." << endl;
+        return false;
+    }
     string first_before_dot = "";
     string first_after_dot = "";
     string second_before_dot = "";
@@ -141,6 +145,11 @@ bool BigReal::operator==(const BigReal &a) const {
 
 BigReal BigReal::operator+(BigReal &a) {
     BigReal ans;
+
+    if (!(this->isValid()) || !a.isValid()) {
+        cout << "Invalid terms." << endl;
+        return ans;
+    }
 
     if (!(a.isNeg() ^ (this->s[0] == '-'))) {
         string first_before_dot = "";
@@ -258,6 +267,11 @@ BigReal BigReal::operator+(BigReal &a) {
 BigReal BigReal::operator-(BigReal &a) {
     BigReal result;
     result.setNum("");
+
+    if (!(this->isValid()) || !a.isValid()) {
+        cout << "Invalid terms." << endl;
+        return result;
+    }
 
     if (this->isNeg() && !a.isNeg()) {
         BigReal temp;
@@ -653,7 +667,10 @@ BigReal BigReal::operator-(BigReal &a) {
 }
 
 bool BigReal::operator<(BigReal &another_real)  {
-    //isValid(another_real);
+    if (!(this->isValid()) || !another_real.isValid()) {
+        cout << "Invalid terms." << endl;
+        return false;
+    }
 
     if (BigReal::isNeg() && !another_real.isNeg()) {      //first real is negative, other is positive
         return true;
@@ -871,7 +888,10 @@ bool BigReal::operator<(BigReal &another_real)  {
 }
 
 bool BigReal::operator>(BigReal &anotherreal)  {
-    //isValid(anotherreal);
+    if (!(this->isValid()) || !anotherreal.isValid()) {
+        cout << "Invalid terms." << endl;
+        return false;
+    }
 
     if (BigReal::isNeg() && !anotherreal.isNeg()) {  //first real is negative, other is positive
         return false;
