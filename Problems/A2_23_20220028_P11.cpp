@@ -1,3 +1,11 @@
+// File: A2_S23_20220028_p11.cpp
+// Purpose: checking if two files are identical(by characters or by words)
+// Author: Ahmed Alaa Eldin
+// Section: S23
+// ID: 20220028
+// TA: Muhammad Talaat
+// Date: 4 Nov 2023
+
 #include<bits/stdc++.h>
 #include<fstream>
 using namespace std;
