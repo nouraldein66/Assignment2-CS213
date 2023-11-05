@@ -347,6 +347,19 @@ BigReal BigReal::operator-(BigReal &a) {
             // reverse resultant string
             reverse(integer_result.begin(), integer_result.end());
 
+            bool allZeros {true};
+            for (int i {0}; i < integer_result.size(); ++i) {
+                if (integer_result[i] != '0') {
+                    allZeros = false;
+                    break;
+                }
+            }
+
+            if (allZeros) {
+                integer_result.clear();
+                integer_result.push_back('0');
+            }
+
             if (compare_fraction(fraction1, fraction2)) {
                 // Dealing with fraction part
 
@@ -449,6 +462,19 @@ BigReal BigReal::operator-(BigReal &a) {
 
                 for (int i {0}; i < integer_result3.size(); ++i) {
                     integer_result.push_back(integer_result3[i]);
+                }
+
+                bool allZeros {true};
+                for (int i {0}; i < integer_result.size(); ++i) {
+                    if (integer_result[i] != '0') {
+                        allZeros = false;
+                        break;
+                    }
+                }
+
+                if (allZeros) {
+                    integer_result.clear();
+                    integer_result.push_back('0');
                 }
 
                 string fraction11 {"1"};
@@ -609,6 +635,7 @@ BigReal BigReal::operator-(BigReal &a) {
 }
 
 bool BigReal::operator<(BigReal &another_real)  {
+    //isValid(another_real);
 
     if (BigReal::isNeg() && !another_real.isNeg()) {      //first real is negative, other is positive
         return true;
@@ -826,7 +853,8 @@ bool BigReal::operator<(BigReal &another_real)  {
 }
 
 bool BigReal::operator>(BigReal &anotherreal)  {
-   
+    //isValid(anotherreal);
+
     if (BigReal::isNeg() && !anotherreal.isNeg()) {  //first real is negative, other is positive
         return false;
     }
