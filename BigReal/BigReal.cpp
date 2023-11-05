@@ -567,6 +567,15 @@ BigReal BigReal::operator-(BigReal &a) {
                 result.s.push_back('.');
             }
 
+            int fraction_result_size = fraction_result.size();
+
+            int i = fraction_result_size - 1;
+
+            while (fraction_result[i] == '0') {
+                fraction_result.pop_back();
+                --i;
+            }
+
             for (int i {0}; i < fraction_result.size(); ++i) {
                 result.s.push_back(fraction_result[i]);
             }
