@@ -1,4 +1,4 @@
-// File: A2_Task2_S23, S24_20220027_20220028_20220360.h
+// File: BigReal.h
 // Purpose: Making a class for big real numbers that ordinary C++ data types cannot handle
 // Authors: Nour Aldeen, Ahmed Alaa Aldeen, Ahmed Abdelnabi
 // Section: S23, S24
