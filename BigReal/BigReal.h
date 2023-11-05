@@ -1,3 +1,11 @@
+// File: A2_Task2_S23, S24_20220027_20220028_20220360.h
+// Purpose: Making a class for big real numbers that ordinary C++ data types cannot handle
+// Authors: Nour Aldeen, Ahmed Alaa Aldeen, Ahmed Abdelnabi
+// Section: S23, S24
+// ID: 20220360, 20220028, 20220027
+// TA: Muhammad Talaat
+// Date: 5 Nov 2023
+
 #ifndef _BIGREAL_H
 #define _BIGREAL_H
 
