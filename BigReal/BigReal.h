@@ -19,7 +19,7 @@ class BigReal {
 private:
     string s;
 public:
-    bool isValid();
+    bool isValid() const;
     bool isNeg();
     bool operator==(const BigReal &a) const;
     BigReal operator+(BigReal &a);
