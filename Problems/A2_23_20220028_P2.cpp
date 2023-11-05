@@ -1,3 +1,11 @@
+// File: A2_S23_20220028_p2.cpp
+// Purpose: Transfroming male speech into both male and female
+// Author: Ahmed Alaa Eldin
+// Section: S23
+// ID: 20220028
+// TA: Muhammad Talaat
+// Date: 4 Nov 2023
+
 #include <bits/stdc++.h>
 #define ll long long
 using namespace std;
