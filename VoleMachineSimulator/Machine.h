@@ -18,7 +18,6 @@ struct Instruction {
 
 class Machine {
 private:
-    int mem[SIZE];
     int reg[REG_SIZE];
     int IR;
 protected:
