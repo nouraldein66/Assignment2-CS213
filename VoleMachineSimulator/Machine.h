@@ -6,6 +6,7 @@
 using namespace std;
 
 const int SIZE = 256;
+const int REG_SIZE = 16;
 
 struct Instruction {
     int op;
@@ -17,15 +18,16 @@ struct Instruction {
 
 class Machine {
 private:
+    int mem[SIZE];
+    int reg[REG_SIZE];
     int IR;
-    int PC;
 protected:
+    int PC;
     Instruction ins;
 public:
     void getIRVAl();
     void getPCVAl();
     void jump(int reg_address, int mem_address);
 };
-
 
 #endif //VOLEMACHINESIMULATOR_MACHINE_H
