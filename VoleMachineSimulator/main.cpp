@@ -7,7 +7,7 @@ int main() {
     ifstream inputFile(fileName);
 
     string line;
-    vector<string>instructions;
+    vector<string> instructions;
 
     while (getline(inputFile, line)) {
         instructions.emplace_back(line);
