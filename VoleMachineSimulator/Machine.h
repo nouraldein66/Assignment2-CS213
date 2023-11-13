@@ -24,6 +24,7 @@ protected:
 public:
     void getIRVAl();
     void getPCVAl();
+    void jump(int reg_address, int mem_address);
 };
 
 
