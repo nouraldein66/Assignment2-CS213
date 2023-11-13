@@ -17,9 +17,10 @@ struct Instruction {
 
 class Machine {
 private:
-    Instruction ins;
     int IR;
     int PC;
+protected:
+    Instruction ins;
 public:
     void getIRVAl();
     void getPCVAl();
