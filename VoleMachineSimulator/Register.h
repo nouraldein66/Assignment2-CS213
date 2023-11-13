@@ -3,9 +3,11 @@
 
 #include "Machine.h"
 
+const int REG_SIZE = 16;
+
 class Register: public Machine{
 private:
-    int reg[SIZE];
+    int reg[REG_SIZE];
 public:
     void getVal(int r);
     void load(int r);
