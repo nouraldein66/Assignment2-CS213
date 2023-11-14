@@ -27,6 +27,9 @@ public:
     void getIRVAl();
     void getPCVAl();
     void jump(int reg_address, int mem_address);
+    void copyRegisters(int register1, int register2);   //copy the bit patterns in R1 to R2
+    void ADDition(int targetRegister, int register1, int register2);
+    deque<int> binaryRepresentation(int n);
 };
 
 #endif //VOLEMACHINESIMULATOR_MACHINE_H
