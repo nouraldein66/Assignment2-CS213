@@ -21,11 +21,14 @@ private:
     int reg[REG_SIZE];
     int IR;
 protected:
+    int mem[SIZE];
     int PC;
     Instruction ins;
 public:
     void getIRVAl();
     void getPCVAl();
+    void Load(int op , int R , int value);
+    void Load(int R , int ad);
     void jump(int reg_address, int mem_address);
     void copyRegisters(int register1, int register2);   //copy the bit patterns in R1 to R2
     void ADDition(int targetRegister, int register1, int register2);
