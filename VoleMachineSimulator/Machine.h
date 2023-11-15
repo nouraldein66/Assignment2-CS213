@@ -9,7 +9,7 @@ const int SIZE = 256;
 const int REG_SIZE = 16;
 
 struct Instruction {
-    int op;
+    char op;
     int register1;
     int register2;
     int register3;
@@ -25,8 +25,12 @@ protected:
     int PC;
     Instruction ins;
 public:
-    void getIRVAl();
-    void getPCVAl();
+    Machine();
+    void printMem();
+    void printReg();
+    int getIRVAl() {return IR;}
+    int getPCVAl() {return PC;}
+    int getVal(size_t i) {return reg[i];}
     void Load(int op , int R , int value);
     void Load(int R , int ad);
     void jump(int reg_address, int mem_address);
