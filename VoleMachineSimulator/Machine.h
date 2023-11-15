@@ -28,6 +28,11 @@ public:
     Machine();
     void printMem();
     void printReg();
+    void setIR(int ir){IR = ir;}
+    void setPC(int pc){PC = pc;}
+    void setMemAddress(int address, int value){
+        mem[address] = value;
+    }
     int getIRVAl() {return IR;}
     int getPCVAl() {return PC;}
     int getVal(size_t i) {return reg[i];}
