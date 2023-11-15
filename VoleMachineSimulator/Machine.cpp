@@ -1,5 +1,13 @@
 #include "Machine.h"
 
+Machine::Machine() {
+    reg[REG_SIZE] = {0};
+    IR = 0;
+    PC = 0;
+    mem[SIZE] = {0};
+    ins = {'C', 0, 0, 0, 0};
+}
+
 void Machine::jump(int reg_address, int mem_address) {
     if (mem_address % 2 != 0 || (reg_address > 15 || reg_address < 0)) {
         cout << "Invalid Instruction." << endl;
