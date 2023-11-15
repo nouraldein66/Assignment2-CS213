@@ -1,6 +1,7 @@
 #include "Machine.h"
 #include "Memory.h"
 
+
 bool checkSize(size_t size) {
     if (size != 3) {
         cout << "Invalid Instruction." << endl;
@@ -9,23 +10,71 @@ bool checkSize(size_t size) {
     return true;
 }
 
+Machine machine1;
+Memory mem1;
+
+void menu(){
+    cout << "1) Get PC Value\n 2) Get IR Value\n 3) Get Memory Values\n 4) Get Registers values\n 5) continue\n";
+    int choice;
+    cin >> choice;
+    switch (choice) {
+        case 1:
+            cout << machine1.getPCVAl() << endl;
+            break;
+        case 2:
+            cout << machine1.getIRVAl() << endl;
+            break;
+        case 3:
+            machine1.printMem();
+            break;
+        case 4:
+            machine1.printReg();
+            break;
+        default:
+            break;
+
+    }
+}
+
+long long to_decimal(string s,int base = 16){
+     long long ans{};
+     int n= (int)s.size();
+     for(int i{};i<n;i++)ans+=(s[i]-'0')*pow(base,n-i-1);
+     return ans;
+}
+
+
+
 int main() {
-    string fileName;
+    /*string fileName;
     cin >> fileName;
 
-    ifstream inputFile(fileName);
-
+    ifstream inputFile(fileName+".txt");
+*/
     string line;
     vector<string> instructions;
-
+/*
     while (getline(inputFile, line)) {
         instructions.emplace_back(line);
     }
 
-    Machine machine1;
-    Memory mem1;
+    for(auto i : instructions){
+        cout << " " << i;
+    }
+*/
+
+    for(int i = 0; i<5; ++i){
+        getline(cin,line);
+        instructions.push_back(line);
+    }
+
+    int startPoint = 160;
 
     for (auto ins: instructions) {
+        machine1.setIR(startPoint);
+        machine1.setPC(startPoint+2);
+
+        menu();
         vector<string> temp;
         string str {""};
         bool isX {false};
@@ -42,7 +91,8 @@ int main() {
                 str = "";
                 continue;
             }
-            str.push_back(x);
+            if(isX)
+                str.push_back(x);   //2 0 22
         }
 
         if (!str.empty()) {
@@ -53,6 +103,20 @@ int main() {
             cout << "Invalid Instruction." << endl;
             return 0;
         }
+        string firstHalf, secondHalf;
+        firstHalf = temp[0] + temp[1];
+        if(temp.size() == 3)
+            secondHalf = temp[2];
+        else
+            secondHalf = temp[2] + temp[3];
+
+        long long value1 = to_decimal(firstHalf);
+        long long value2 = to_decimal(secondHalf);
+
+        machine1.setMemAddress(startPoint,value1);
+        machine1.setMemAddress(startPoint+1,value2);
+        startPoint+=2;
+
         char op_code = temp.front()[0];
         switch (op_code) {
             case '1':
@@ -104,6 +168,7 @@ int main() {
                 return 0;
         }
     }
+    menu();
 
 
 
