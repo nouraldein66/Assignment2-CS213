@@ -78,3 +78,15 @@ void Machine::Load(int R, int ad) {
 
     reg[R] = mem[ad];
 }
+
+void Machine::printReg() {
+    for(int i=0; i<REG_SIZE; ++i){
+        cout << "R" << i << ": " << hex << reg[i] << endl;
+    }
+}
+
+void Machine::printMem() {
+    for(int i=0; i<SIZE; ++i){
+        cout << "M" << i << ": " << hex << mem[i] << endl;
+    }
+}
