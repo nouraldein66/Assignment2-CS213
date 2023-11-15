@@ -1,6 +1,10 @@
 #include "Machine.h"
 
 void Machine::jump(int reg_address, int mem_address) {
+    if (mem_address % 2 != 0 || (reg_address > 15 || reg_address < 0)) {
+        cout << "Invalid Instruction." << endl;
+        return;
+    }
     if (reg[reg_address] == reg[0]) {
         PC = mem_address;
     } else {
@@ -49,11 +53,11 @@ deque<int> Machine::binaryRepresentation(int n){
 }
 
 void Machine::Load(int op, int R, int value) {
-   if(R >= REG_SIZE || R < 0)
-   {
-       cout<<"Invalid instruction\n";
-       return;
-   }
+    if(R >= REG_SIZE || R < 0)
+    {
+        cout<<"Invalid instruction\n";
+        return;
+    }
     reg[R] = value;
 }
 
@@ -64,5 +68,5 @@ void Machine::Load(int R, int ad) {
         return;
     }
 
-reg[R] = mem[ad];
+    reg[R] = mem[ad];
 }
