@@ -2,6 +2,13 @@
 #include "Memory.h"
 
 
+long long to_decimal(string s,int base = 16){
+    long long ans{};
+    int n= (int)s.size();
+    for(int i{};i<n;i++)ans+=(s[i]-'0')*pow(base,n-i-1);
+    return ans;
+}
+
 bool checkSize(size_t size) {
     if (size != 3) {
         cout << "Invalid Instruction." << endl;
@@ -36,46 +43,28 @@ void menu(){
     }
 }
 
-long long to_decimal(string s,int base = 16){
-     long long ans{};
-     int n= (int)s.size();
-     for(int i{};i<n;i++)ans+=(s[i]-'0')*pow(base,n-i-1);
-     return ans;
-}
-
-
 
 int main() {
-    /*string fileName;
-    cin >> fileName;
 
-    ifstream inputFile(fileName+".txt");
-*/
+    ifstream inputFile("input.txt");
+
     string line;
     vector<string> instructions;
-/*
+// store instructions int the vec
+
+    if(inputFile.fail()) {
+        cerr <<"Unable to open file." << endl;
+    }
     while (getline(inputFile, line)) {
         instructions.emplace_back(line);
     }
-
-    for(auto i : instructions){
-        cout << " " << i;
-    }
-*/
-
-    for(int i = 0; i<5; ++i){
-        getline(cin,line);
-        instructions.push_back(line);
-    }
-
     int startPoint = 160;
 
-    for (auto ins: instructions) {
-        machine1.setIR(startPoint);
-        machine1.setPC(startPoint+2);
+    for(int i{} ; i < (int)instructions.size() ; ++i) {
+        string ins = instructions[i];
 
-        menu();
-        vector<string> temp;
+        // getting each insturction
+        vector<string> temp;    //stores the instructions and operands in indices of temp
         string str {""};
         bool isX {false};
 
@@ -96,13 +85,14 @@ int main() {
         }
 
         if (!str.empty()) {
-            temp.emplace_back(str);
+            temp.emplace_back(str);     //temp = {2,0,22}
         }
 
         if (temp.front().size() > 1) {
             cout << "Invalid Instruction." << endl;
             return 0;
         }
+        // storing the instruction in the memory
         string firstHalf, secondHalf;
         firstHalf = temp[0] + temp[1];
         if(temp.size() == 3)
@@ -116,6 +106,48 @@ int main() {
         machine1.setMemAddress(startPoint,value1);
         machine1.setMemAddress(startPoint+1,value2);
         startPoint+=2;
+
+
+    }
+
+
+// implementing the instructions
+    for (auto ins: instructions) {
+        // setting the IR and PC values
+        machine1.setIR(startPoint);
+        machine1.setPC(startPoint+2);
+// showing a menu
+        menu();
+        // getting each insturction
+        vector<string> temp;    //stores the instructions and operands in indices of temp
+        string str {""};
+        bool isX {false};
+
+        for (const auto &x: ins) {
+            if (x == 'x' || x == 'X') {
+                isX = true;
+                continue;
+            }
+
+            if (x == ' ') {
+                isX = false;
+                temp.emplace_back(str);
+                str = "";
+                continue;
+            }
+            if(isX)
+                str.push_back(x);   //2 0 22
+        }
+
+        if (!str.empty()) {
+            temp.emplace_back(str);     //temp = {2,0,22}
+        }
+
+        if (temp.front().size() > 1) {
+            cout << "Invalid Instruction." << endl;
+            return 0;
+        }
+        // storing the instruction in the memory
 
         char op_code = temp.front()[0];
         switch (op_code) {
@@ -148,7 +180,7 @@ int main() {
                 if (temp.size() != 4) {
                     cout << "Invalid Instruction." << endl;
                     return 0;
-                }
+                }                       // temp = {5, 1, 2, 3}
                 machine1.ADDition(stoi(temp[1]), stoi(temp[2]), stoi(temp[3]));
                 break;
 
@@ -169,8 +201,6 @@ int main() {
         }
     }
     menu();
-
-
 
     return 0;
 }
