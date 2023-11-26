@@ -53,6 +53,10 @@ void Machine::ADDition(int targetRegister, int register1, int register2) {
 
 deque<int> Machine::binaryRepresentation(int n){
     deque <int> dq;
+    if(n == 0){
+        dq.push_back(0);
+    }
+
     while (n != 0) {
         dq.push_front(n%2);
         n /= 2;
