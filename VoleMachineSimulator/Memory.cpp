@@ -10,5 +10,5 @@ void Memory::store(int val, int ad) {
         return;
     }
     mem[ad] = val;
-    ++++PC;
+    ++PC;
 }
