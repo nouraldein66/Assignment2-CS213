@@ -377,10 +377,16 @@ BigReal BigReal::operator-(BigReal &a) {
                 }
             }
 
-            if (allZeros) {
+            if (allZeros) { // If the integer is all zeros, then leave only one zero, an aesthetic touch.
                 integer_result.clear();
                 integer_result.push_back('0');
             }
+
+            reverse(integer_result.begin(), integer_result.end());
+            while (integer_result.size() > 0 && integer_result[integer_result.size() - 1] == '0' && !allZeros) { // Remove all zeros from the beginning of the integer
+                integer_result.pop_back();
+            }
+            reverse(integer_result.begin(), integer_result.end());
 
             if (compare_fraction(fraction1, fraction2)) {
                 // Dealing with fraction part
@@ -388,7 +394,7 @@ BigReal BigReal::operator-(BigReal &a) {
                 int n1 = fraction1.length();
                 int n2 = fraction2.length();
 
-                for (int i {0}; i < n2 - n1; ++i) {
+                for (int i {0}; i < n2 - n1; ++i) { // Make both of them the same length by adding 0s
                     fraction1.push_back('0');
                 }
 
@@ -439,7 +445,7 @@ BigReal BigReal::operator-(BigReal &a) {
                 int f1 = fraction1.size();
                 int f2 = fraction2.size();
 
-                for (int i {0}; i < f2 - f1; ++i) {
+                for (int i {0}; i < f2 - f1; ++i) { // Make both of them the same length by adding 0s
                     fraction1.push_back('0');
                 }
 
@@ -450,6 +456,8 @@ BigReal BigReal::operator-(BigReal &a) {
                 int n3 = integer_result.length();
 
                 reverse(integer_result.begin(), integer_result.end());
+
+                // If the fraction part of the first term is less than the fraction part of the second term, subtract 1 from the integer result
 
                 int carry = 0;
 
@@ -499,6 +507,13 @@ BigReal BigReal::operator-(BigReal &a) {
                     integer_result.push_back('0');
                 }
 
+                reverse(integer_result.begin(), integer_result.end());
+                while (integer_result.size() > 0 && integer_result[integer_result.size() - 1] == '0' && !allZeros) { // Remove all zeros from the beginning of the integer
+                    integer_result.pop_back();
+                }
+                reverse(integer_result.begin(), integer_result.end());
+
+                // Suppose we have 2.6 and 1.7, then to subtract the fractions we compute 16 - 7
                 string fraction11 {"1"};
                 string fraction22 {""};
                 string fraction33 {""};
@@ -552,6 +567,8 @@ BigReal BigReal::operator-(BigReal &a) {
                 fraction_result.clear();
                 reverse(fraction33.begin(), fraction33.end());
 
+                /*The result may leave an erroneous zero, for example 16 - 7 may result in 09 which is wrong in terms of
+                fractions, so the below algorithm takes care of that*/
                 if (fraction33.size() > fraction1.size() || fraction33.size() > fraction2.size()) {
                     string temp = fraction33;
                     fraction33.clear();
@@ -565,24 +582,8 @@ BigReal BigReal::operator-(BigReal &a) {
                 }
             }
 
-            int w {0};
-            if (integer_result.size() == 0) {
-                while (integer_result[w] == '0') {
-                    ++w;
-                    if (w >= integer_result.size() || integer_result[w] != '0') {
-                        break;
-                    } else {
-                        ++w;
-                    }
-                }
-            }
-
-            if (integer_result.size() == 0) {
-                result.s.push_back('0');
-            } else {
-                for (; w < integer_result.size(); ++w) {
-                    result.s.push_back(integer_result[w]);
-                }
+            for (int w {0}; w < integer_result.size(); ++w) {
+                result.s.push_back(integer_result[w]);
             }
 
             if (fraction_result.size() > 0) {
@@ -594,7 +595,7 @@ BigReal BigReal::operator-(BigReal &a) {
             int i = fraction_result_size - 1;
 
 
-            while (i >= 0 && fraction_result[i] == '0') {
+            while (i >= 0 && fraction_result[i] == '0') { // remove leading zeros from a fraction
                 fraction_result.pop_back();
                 --i;
             }
