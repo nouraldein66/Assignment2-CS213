@@ -49,24 +49,25 @@ int main() {
     ifstream inputFile("input.txt");
 
     string line;
+    //a vector for storing instructions
     vector<string> instructions;
-// store instructions int the vec
-
     if(inputFile.fail()) {
         cerr <<"Unable to open file." << endl;
     }
+
     while (getline(inputFile, line)) {
         instructions.emplace_back(line);
     }
     int startPoint = 160;
 
+    //in this for loop we split each instruction into operator and operand
+    //then store each instruction on the memory
     for(int i{} ; i < (int)instructions.size() ; ++i) {
         string ins = instructions[i];
-
         // getting each insturction
-        vector<string> temp;    //stores the instructions and operands in indices of temp
+        vector<string> temp;    //stores the operator and operands in indices of temp
         string str {""};
-        bool isX {false};
+        bool isX {false};   //because the file that we read from stores the instructions as hexa
 
         for (const auto &x: ins) {
             if (x == 'x' || x == 'X') {
@@ -81,7 +82,7 @@ int main() {
                 continue;
             }
             if(isX)
-                str.push_back(x);   //2 0 22
+                str.push_back(x);
         }
 
         if (!str.empty()) {
@@ -92,7 +93,9 @@ int main() {
             cout << "Invalid Instruction." << endl;
             return 0;
         }
-        // storing the instruction in the memory
+
+        // storing the instructions in the memory: the instruction will be split into two halves
+        // each half is stored on a memory cell.
         string firstHalf, secondHalf;
         firstHalf = temp[0] + temp[1];
         if(temp.size() == 3)
@@ -111,12 +114,13 @@ int main() {
     }
 
 
-// implementing the instructions
+    // this for loop is for splitting the instructions into operator and operands
+    // and then implement them.
     for (auto ins: instructions) {
         // setting the IR and PC values
         machine1.setIR(startPoint);
         machine1.setPC(startPoint+2);
-// showing a menu
+        // showing a menu
         menu();
         // getting each insturction
         vector<string> temp;    //stores the instructions and operands in indices of temp
