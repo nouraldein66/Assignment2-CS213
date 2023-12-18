@@ -32,6 +32,9 @@ void Machine::ADDition(int targetRegister, int register1, int register2) {
     deque<int> B2 = binaryRepresentation(reg[register2]);
     int twosComplement1 = 0, twosComplement2 = 0;
 
+    //first digit from the left in two's complement if it's 1; it'll be negative
+    //then we'll add the rest of the digits to that negative number until the number ends
+    //that will give us the two's complement of the number.
     if(B1[0] == 1)
         twosComplement1 = -(pow(2,B1.size()-1));
     if(B2[0] == 1)
