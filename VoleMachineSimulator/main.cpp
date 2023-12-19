@@ -26,16 +26,20 @@ void menu(){
     cin >> choice;
     switch (choice) {
         case 1:
-            cout << machine1.getPCVAl() << endl;
+            cout << machine1.getPCVAl() << endl << endl;
+            menu();
             break;
         case 2:
-            cout << machine1.getIRVAl() << endl;
+            cout << machine1.getIRVAl() << endl << endl;
+            menu();
             break;
         case 3:
             machine1.printMem();
+            menu();
             break;
         case 4:
             machine1.printReg();
+            menu();
             break;
         default:
             break;
@@ -51,6 +55,7 @@ int main() {
     string line;
     //a vector for storing instructions
     vector<string> instructions;
+    
     if(inputFile.fail()) {
         cerr <<"Unable to open file." << endl;
     }
