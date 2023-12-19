@@ -28,44 +28,11 @@ void Machine::copyRegisters(int register1, int register2) {
 
 //add the bit-patterns in R1 and R2 as two's complement
 void Machine::ADDition(int targetRegister, int register1, int register2) {
-    deque<int> B1 = binaryRepresentation(reg[register1]);
-    deque<int> B2 = binaryRepresentation(reg[register2]);
-    int twosComplement1 = 0, twosComplement2 = 0;
-
-    //first digit from the left in two's complement if it's 1; it'll be negative
-    //then we'll add the rest of the digits to that negative number until the number ends
-    //that will give us the two's complement of the number.
-    if(B1[0] == 1)
-        twosComplement1 = -(pow(2,B1.size()-1));
-    if(B2[0] == 1)
-        twosComplement2 = -(pow(2,B2.size()-1));
-
-    for (int i = 1; i < B1.size(); ++i) {
-        if(B1[i] == 1)
-            twosComplement1+=(pow(2,B1.size()-i-1));
-    }
-    for (int i = 1; i < B2.size(); ++i) {
-        if(B2[i] == 1)
-            twosComplement2+=(pow(2,B2.size()-i-1));
-    }
-
-    reg[targetRegister] = twosComplement1 + twosComplement2;
+    reg[targetRegister] = -(reg[register1] + reg[register2]);
 
     PC+=2;
 }
 
-deque<int> Machine::binaryRepresentation(int n){
-    deque <int> dq;
-    if(n == 0){
-        dq.push_back(0);
-    }
-
-    while (n != 0) {
-        dq.push_front(n%2);
-        n /= 2;
-    }
-    return dq;
-}
 
 void Machine::Load(int op, int R, int value) {
     if(R >= REG_SIZE || R < 0)
