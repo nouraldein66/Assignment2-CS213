@@ -6,30 +6,46 @@
 // TA: Muhammad Talaat
 // Date: 5 Nov 2023
 
-#ifndef _BIGREAL_H
-#define _BIGREAL_H
+#ifndef BIGREAL_H
+#define BIGREAL_H
 
-#include <bits/stdc++.h>
+#include <string>
+#include <stdexcept>
+#include <boost/multiprecision/cpp_dec_float.hpp>
 
-using namespace std;
+namespace br {
+
+using Decimal = boost::multiprecision::cpp_dec_float_50;
 
 class BigReal {
-    friend istream &operator>>(istream &in, BigReal &a);
-    friend  ostream &operator<<(ostream &out, const BigReal &a);
-private:
-    string s;
 public:
-    bool isValid() const;
-    bool isNeg();
-    bool operator==(const BigReal &a) const;
-    BigReal operator+(BigReal &a);
-    BigReal operator-(BigReal &a);
-    bool operator<(BigReal &another_real);
-    bool operator>(BigReal &anotherreal);
-    void setNum(string s);
-    string getNum() const;
+    BigReal() = default;
+    explicit BigReal(const std::string &s);
+    explicit BigReal(const Decimal &d) : value(d) {}
+
+    static bool isValid(const std::string &s);
+
+    std::string toString() const;
+
+    friend BigReal operator+(const BigReal &lhs, const BigReal &rhs);
+    friend BigReal operator-(const BigReal &lhs, const BigReal &rhs);
+    friend BigReal operator*(const BigReal &lhs, const BigReal &rhs);
+    friend BigReal operator/(const BigReal &lhs, const BigReal &rhs);
+
+    friend bool operator==(const BigReal &lhs, const BigReal &rhs);
+    friend bool operator!=(const BigReal &lhs, const BigReal &rhs);
+    friend bool operator<(const BigReal &lhs, const BigReal &rhs);
+    friend bool operator<=(const BigReal &lhs, const BigReal &rhs);
+    friend bool operator>(const BigReal &lhs, const BigReal &rhs);
+    friend bool operator>=(const BigReal &lhs, const BigReal &rhs);
+
+    friend std::ostream &operator<<(std::ostream &os, const BigReal &r);
+    friend std::istream &operator>>(std::istream &is, BigReal &r);
+
+private:
+    Decimal value;
 };
 
-bool compare_fraction(string s1, string s2);
+}
 
-#endif //_BIGREAL_H
+#endif // BIGREAL_H
